@@ -20,9 +20,6 @@ headers = {'content-type': 'application/x-www-form-urlencoded',
 
 def accessPoint_down_handler():
     now = datetime.datetime.now()
-    minute = now.minute
-    hour = now.hour
-    day = now.day
     month = now.month
     year = now.year
     

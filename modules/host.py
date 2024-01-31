@@ -21,16 +21,12 @@ headers = {'content-type': 'application/x-www-form-urlencoded',
 
 def host_down_handler():
     now = datetime.datetime.now()
-    minute = now.minute
-    hour = now.hour
-    day = now.day
     month = now.month
     year = now.year
     
     print("host_down_handler is running...")
 
     try:
-        
         with httpx.Client() as client:
             params = {
                 "columns": ['name', 'state', 'last_state', 'labels', 'groups', 'address'],

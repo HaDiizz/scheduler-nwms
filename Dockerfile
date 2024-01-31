@@ -28,4 +28,4 @@ COPY . /app
 EXPOSE 5500
 
 # Run the application using gunicorn
-CMD ["gunicorn", "app:app", "-b", "0.0.0.0:5500"]
+CMD ["/venv/bin/python3", "app.py"]

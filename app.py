@@ -16,7 +16,7 @@ def main():
     scheduler.start()
 
     trigger = CronTrigger(
-        year="*", month="*", day="*", hour="*", minute="*/1", second="*"
+        year="*", month="*", day="*", hour="*", minute="*", second="0"
     )
     scheduler.add_job(
         host_down_handler,

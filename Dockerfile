@@ -5,7 +5,7 @@ RUN echo 'deb http://deb.debian.org/debian sid main contrib non-free' > /etc/apt
 
 # Update package lists and upgrade existing packages
 RUN apt update && apt upgrade -y
-
+RUN apt-get install tzdata -y
 # Install necessary dependencies
 RUN apt install -y python3 python3-dev python3-pip python3-venv npm git
 

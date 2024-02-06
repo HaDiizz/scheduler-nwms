@@ -5,12 +5,13 @@ from modules.host import host_down_handler
 from modules.service import service_down_handler
 from modules.access_point import accessPoint_down_handler
 import models
-
+from controller.logs import Logger
 
 models.init_mongoengine()
-
+logger = Logger(__name__)
 
 def main():
+    logger.info("The scheduler is being initiated.")
     scheduler = BackgroundScheduler()
     scheduler = BackgroundScheduler()
     scheduler.start()
@@ -38,7 +39,7 @@ def main():
         while True:
             sleep(5)
     except (KeyboardInterrupt, SystemExit):
-        print("Shutting down...")
+        logger.info("Shutting down...")
         scheduler.shutdown()
 
 

@@ -7,10 +7,11 @@ import requests
 from helpers.utils import cal_min_down, cal_sla, get_all_ap_list
 from helpers.api import access_point_list, access_point_is_down
 from bson.objectid import ObjectId
-
+from controller.logs import Logger
 
 load_dotenv()
 
+logger = Logger(__name__)
 
 url = 'https://notify-api.line.me/api/notify'
 line_noti_token = os.environ['LINE_NOTI_TOKEN']
@@ -22,7 +23,8 @@ def accessPoint_down_handler():
     now = datetime.datetime.now()
     month = now.month
     year = now.year
-
+    
+    logger.info("accessPoint_down_handler is running...")
     print("accessPoint_down_handler is running...")
 
     try:
@@ -86,6 +88,7 @@ def accessPoint_down_handler():
         else:
             return []
     except Exception as ex:
+        logger.error(f"AccessPoint error: {ex}")
         print("AccessPoint error: ", ex)
         return None
 

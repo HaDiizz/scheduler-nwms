@@ -7,7 +7,7 @@ import requests
 from helpers.utils import cal_min_down, cal_sla, DEFAULT_LAT, DEFAULT_LNG
 from helpers.api import host_is_down, API_URL, HEADERS
 from bson.objectid import ObjectId
-
+from controller.logs import Logger
 load_dotenv()
 
 
@@ -16,12 +16,14 @@ line_noti_token = os.environ['LINE_NOTI_TOKEN']
 headers = {'content-type': 'application/x-www-form-urlencoded',
            'Authorization': 'Bearer ' + line_noti_token}
 
+logger = Logger(__name__)
 
 def host_down_handler():
     now = datetime.datetime.now()
     month = now.month
     year = now.year
 
+    logger.info("host_down_handler is running...")
     print("host_down_handler is running...")
 
     try:
@@ -60,6 +62,7 @@ def host_down_handler():
         else:
             return []
     except Exception as ex:
+        logger.error(f"host_down_handler error: {ex}")
         print("host_down_handler error: ", ex)
         return None
 

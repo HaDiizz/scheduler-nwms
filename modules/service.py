@@ -7,7 +7,7 @@ import requests
 from helpers.utils import cal_min_down, cal_sla
 from helpers.api import service_list
 from bson.objectid import ObjectId
-
+from controller.logs import Logger
 
 load_dotenv()
 
@@ -17,12 +17,14 @@ line_noti_token = os.environ['LINE_NOTI_TOKEN']
 headers = {'content-type': 'application/x-www-form-urlencoded',
            'Authorization': 'Bearer ' + line_noti_token}
 
+logger = Logger(__name__)
 
 def service_down_handler():
     now = datetime.datetime.now()
     month = now.month
     year = now.year
 
+    logger.info("service_down_handler is running...")
     print("service_down_handler is running...")
 
     try:
@@ -48,6 +50,7 @@ def service_down_handler():
         else:
             return []
     except Exception as ex:
+        logger.error(f"service_down_handler error: {ex}")
         print("service_down_handler error: ", ex)
         return None
 
